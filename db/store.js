@@ -1,7 +1,7 @@
-// look up uuid (util.promisify)
+// // look up uuid (util.promisify)
 
-getNotes() {
-    return read().then {
-        // parse notes to return them as parsed notes
-    }
-}
+// getNotes() {
+//     return read().then {
+//         // parse notes to return them as parsed notes
+//     }
+// }

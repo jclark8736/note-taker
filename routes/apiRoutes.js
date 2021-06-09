@@ -8,10 +8,10 @@ router.get('/notes', (req, res) => {
     .then((notes) => {
         return res.json(notes)
     })
-    // .catch((err) => res.status(500).json(err))
+    .catch((err) => res.status(500).json(err))
 })
 
-localhost:/3000/api/notes
+//localhost:/3000/api/notes
 
 
 
