@@ -17,7 +17,12 @@ router.post('/notes', (req, res) => {
     console.log(req.body);
     res.json(req.body);
     const storedNotes = store.writeNotes(req.body)
-    console.log(storedNotes);
+    console.log(storedNotes)
+    .then((notes) => {
+        return res.json(notes)
+    })
+    .catch((err) => res.status(500).json(er))
+
     // .then((notes) => {
     //     return res.json(notes)
     // })

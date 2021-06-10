@@ -42,7 +42,7 @@ const store = {
         
         console.log("test route")
         const notes = fs.readFileSync(__dirname + "/db.json");
-        // notes.push(body)
+        notes.push(body)
         console.log(notes)
         return JSON.parse(notes)
         
