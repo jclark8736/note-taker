@@ -13,10 +13,19 @@ router.get('/notes', (req, res) => {
 
 //localhost:/3000/api/notes
 
+router.post('/notes', (req, res) => {
+    console.log(req.body);
+    res.json(req.body);
+    const storedNotes = store.writeNotes(req.body)
+    console.log(storedNotes);
+    // .then((notes) => {
+    //     return res.json(notes)
+    // })
+    // .catch((err) => res.status(500).json(err))
+})
 
 
-
-
+//push req.body to db.json array - stringify
 
 
 
