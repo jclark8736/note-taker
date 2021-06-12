@@ -23,11 +23,7 @@ router.post('/notes', async (req, res) => {
     console.log(storedNotes)
     
     fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes))
-    
-    // .then((notes) => {
-    //     return res.json(notes)
-    // })
-    // .catch((err) => res.status(500).json(err))
+
 })
 
 router.delete("/notes/:id", async (req, res) => {
@@ -37,6 +33,7 @@ router.delete("/notes/:id", async (req, res) => {
    for (i = 0; i < returnedNotes.length; i++) {
        if (req.params.id == returnedNotes[i].id) {
            deleteArray = returnedNotes.splice(i, 1);
+           console.log(deleteArray)
            
            
        }
