@@ -32,23 +32,33 @@ const store = {
     getNotes: async function() {
         
         console.log("test route")
-        const notes = await fs.readFileSync(__dirname + "/db.json")
+        let notes = await fs.readFileSync(__dirname + "/db.json")
         console.log(JSON.parse(notes))
         return JSON.parse(notes)
+        
+        
+    },
+    writeNotes: async function(note) {
+        
+        
+        let notes = await JSON.parse(fs.readFileSync(__dirname + "/db.json"));
+        //push new note to array of spread notes
+        notes.push(note)
+        //return/write array to db.json - under api routes
+        console.log("TESTNOTES")
+        console.log(notes)
+        return notes
+
+    
             
         
     },
-    writeNotes: function(body) {
-        
-        console.log("test route")
-        const notes = fs.readFileSync(__dirname + "/db.json");
-        notes.push(body)
-        console.log(notes)
-        return JSON.parse(notes)
-        
-            
+    
+    deleteNotes: async function() {
         
     }
+
+    
 }
 
 module.exports = store;

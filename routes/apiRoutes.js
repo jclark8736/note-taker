@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const store = require('../db/store');
+const fs = require("fs");
 
 // create a route that respondes with all notes coming from the database
 
@@ -12,23 +13,38 @@ router.get('/notes', (req, res) => {
 })
 
 //localhost:/3000/api/notes
-
-router.post('/notes', (req, res) => {
+//store.writenotes is function inside store.js that retreives db notes
+//adds new note from user submission
+//writefilesync 
+router.post('/notes', async (req, res) => {
     console.log(req.body);
     res.json(req.body);
-    const storedNotes = store.writeNotes(req.body)
+    const storedNotes = await store.writeNotes(req.body)
     console.log(storedNotes)
-    .then((notes) => {
-        return res.json(notes)
-    })
-    .catch((err) => res.status(500).json(er))
-
+    
+    fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes))
+    
     // .then((notes) => {
     //     return res.json(notes)
     // })
     // .catch((err) => res.status(500).json(err))
 })
 
+router.delete("/notes/:id", async (req, res) => {
+    let deleteArray;
+    console.log (req.params.id)
+   const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
+   for (i = 0; i < returnedNotes.length; i++) {
+       if (req.params.id == returnedNotes[i].id) {
+           deleteArray = returnedNotes.splice(i, 1);
+           
+           
+       }
+   }
+   fs.writeFileSync("./db/db.json", JSON.stringify(deleteArray));
+
+    
+})
 
 //push req.body to db.json array - stringify
 
