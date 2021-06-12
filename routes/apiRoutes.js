@@ -30,14 +30,21 @@ router.delete("/notes/:id", async (req, res) => {
     let deleteArray;
     console.log (req.params.id)
    const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
-   for (i = 0; i < returnedNotes.length; i++) {
-       if (req.params.id == returnedNotes[i].id) {
-           deleteArray = returnedNotes.splice(i, 1);
-           console.log(deleteArray)
-           
-           
-       }
-   }
+
+   returnedNotes.forEach((item, i) => {
+    item.id = i + 1;});
+    console.log(returnedNotes)
+
+    deleteArray = returnedNotes.splice(i, 1);
+    console.log(deleteArray)
+
+
+//    for (i = 0; i < returnedNotes.length; i++) {
+//        if (req.params.id == returnedNotes[i].id) {
+//            deleteArray = returnedNotes.splice(i, 1);
+//            console.log(deleteArray)}}
+
+
    fs.writeFileSync("./db/db.json", JSON.stringify(deleteArray));
 
     
