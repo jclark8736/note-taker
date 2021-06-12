@@ -20,32 +20,44 @@ router.post('/notes', async (req, res) => {
     console.log(req.body);
     res.json(req.body);
     const storedNotes = await store.writeNotes(req.body)
-    console.log(storedNotes)
+    
     
     fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes))
-
+    
+    // .then((notes) => {
+    //     return res.json(notes)
+    // })
+    // .catch((err) => res.status(500).json(err))
 })
 
 router.delete("/notes/:id", async (req, res) => {
     let deleteArray;
     console.log (req.params.id)
-   const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
+    
+   //const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
+   const returnedNotes = await (fs.readFileSync("./db/db.json"));
+    console.log("TEST RETURN NOTES" + returnedNotes)
+    console.log(typeof(returnedNotes))
+    const indexed = returnedNotes.map((item, index) => Object.assign(item, { index }))
+    console.log("TEST INDEXED" + indexed)
 
-   returnedNotes.forEach((item, i) => {
-    item.id = i + 1;});
-    console.log(returnedNotes)
 
-    deleteArray = returnedNotes.splice(i, 1);
-    console.log(deleteArray)
+
+    // i= 0;
+    // deleteArray = returnedNotes.forEach((title, index) => title.id = i + 1);
+    // console.log(deleteArray)
+    // console.log(JSON.stringify(deleteArray))
 
 
 //    for (i = 0; i < returnedNotes.length; i++) {
 //        if (req.params.id == returnedNotes[i].id) {
 //            deleteArray = returnedNotes.splice(i, 1);
-//            console.log(deleteArray)}}
-
-
-   fs.writeFileSync("./db/db.json", JSON.stringify(deleteArray));
+//            console.log(deleteArray)
+           
+           
+//        }
+//    }
+//    fs.writeFileSync("./db/db.json", JSON.stringify(deleteArray));
 
     
 })

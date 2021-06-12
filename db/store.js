@@ -31,8 +31,9 @@ const path = require("path");
 const store = {
     getNotes: async function() {
         
-        console.log("test route")
+        
         let notes = await fs.readFileSync(__dirname + "/db.json")
+        
         console.log(JSON.parse(notes))
         return JSON.parse(notes)
         
@@ -54,9 +55,7 @@ const store = {
         
     },
     
-    deleteNotes: async function() {
-        
-    }
+    deleteNotes: async function() {}
 
     
 }
