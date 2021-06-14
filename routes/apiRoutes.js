@@ -40,10 +40,17 @@ router.delete("/notes/:id", async (req, res) => {
    //const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
    const returnedNotes = await (fs.readFileSync("./db/db.json"));
     console.log("TEST RETURN NOTES" + returnedNotes)
-    
+    console.log("TEST AGAIN" + returnedNotes)
+    console.log("TEST ARRAY" + returnedNotes[1])
+    console.log("TEST OBJ" + returnedNotes[1].id)
+
+
     const indexed = returnedNotes.map((item, index) => Object.assign(item, { index }))
     console.log("TEST INDEXED" + indexed)
     console.log(req.params.id)
+
+
+    console.log(indexed + "INDEXED")
 
     i= 0;
     
@@ -51,8 +58,8 @@ router.delete("/notes/:id", async (req, res) => {
     // console.log(deleteArray)
     // console.log(JSON.stringify(deleteArray))
 
-    console.log(returnedNotes)
-    console.log("TEST RETURN")
+   
+    
 
 
    for (i = 0; i < returnedNotes.length; i++) {
