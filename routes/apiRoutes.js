@@ -27,17 +27,14 @@ router.post('/notes', async (req, res) => {
     
     fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes))
     
-    // .then((notes) => {
-    //     return res.json(notes)
-    // })
-    // .catch((err) => res.status(500).json(err))
+ 
 })
 
 router.delete("/notes/:id", async (req, res) => {
     let deleteArray;
     console.log (req.params.id)
     
-   //const returnedNotes = await JSON.parse(fs.readFileSync("./db/db.json"));
+  
    const returnedNotes = await (fs.readFileSync("./db/db.json"));
    const formatedNotes = (JSON.parse(returnedNotes));
    console.log(formatedNotes.length)
@@ -45,12 +42,7 @@ router.delete("/notes/:id", async (req, res) => {
  
 
 
-    // const indexed = returnedNotes.map((item, index) => Object.assign(item, { index }))
-    // console.log("TEST INDEXED" + indexed)
-    // console.log(req.params.id)
-    // console.log(indexed.length + "INDEXLENGTH")
 
-    // console.log(indexed + "INDEXED")
 
     i= 0;
     
@@ -64,17 +56,18 @@ router.delete("/notes/:id", async (req, res) => {
 
    for (i = 0; i < formatedNotes.length; i++) {
        
-       if (req.params.id == returnedNotes[i].id) {
-           deleteArray = returnedNotes.splice(i, 1);
+       if (req.params.id == formatedNotes[i].id) {
+           deleteArray = formatedNotes.splice(i, 1);
            console.log(deleteArray)
+           console.log(formatedNotes)
            
            
        }
    }
-   fs.writeFileSync("./db/db.json", JSON.stringify(deleteArray));
+   fs.writeFileSync("./db/db.json", JSON.stringify(formatedNotes));
 })
 
-//push req.body to db.json array - stringify
+
 
 module.exports = router;
 
